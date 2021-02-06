@@ -13,4 +13,14 @@ RSpec.describe Book do
       expect(book.isbn).to eq(isbn)
     end
   end
+
+  context '#title_include?' do
+    context "with \"Harry Potter and the Sorcerer's Stone\" as the book's title" do
+      it "returns true if title keyword is 'Harry'" do
+        book = described_class.new(title, author, isbn)
+        keyword = 'Harry'
+        expect(book.title_include?(keyword)).to eq(true)
+      end
+    end
+  end
 end

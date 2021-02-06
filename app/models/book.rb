@@ -6,4 +6,8 @@ class Book
     @author = author
     @isbn = isbn
   end
+
+  def title_include?(keyword)
+    @title.include?(keyword)
+  end
 end
