@@ -9,6 +9,10 @@ class Bookshelf
 
   def put_book(book)
     @last_position[1] += 1
+    if @last_position[1] > @columns
+      @last_position[0] += 1
+      @last_position[1] = 1
+    end
     @rows[@last_position[0] - 1] << book
     @last_position
   end

@@ -29,13 +29,25 @@ RSpec.describe Bookshelf do
 
     context 'with one book in the bookshelf' do
       before do
-        @bookshelf = described_class.new(1, 1)
+        @bookshelf = described_class.new(1, 2)
         @bookshelf.put_book(@book)
       end
 
       it 'returns [1, 2] when put another book' do
         result = @bookshelf.put_book(@book)
         expect(result).to eq([1, 2])
+      end
+    end
+
+    context 'with first row is full' do
+      before do
+        @bookshelf = described_class.new(2, 1)
+        @bookshelf.put_book(@book)
+      end
+
+      it 'returns [2, 1] when put another book' do
+        result = @bookshelf.put_book(@book)
+        expect(result).to eq([2, 1])
       end
     end
   end
