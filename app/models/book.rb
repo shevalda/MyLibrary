@@ -8,6 +8,6 @@ class Book
   end
 
   def title_include?(keyword)
-    @title.include?(keyword)
+    @title.downcase.include?(keyword.downcase)
   end
 end

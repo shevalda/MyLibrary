@@ -21,6 +21,12 @@ RSpec.describe Book do
         keyword = 'Harry'
         expect(book.title_include?(keyword)).to eq(true)
       end
+
+      it "returns true if title keyword is 'harry'" do
+        book = described_class.new(title, author, isbn)
+        keyword = 'harry'
+        expect(book.title_include?(keyword)).to eq(true)
+      end
     end
   end
 end
