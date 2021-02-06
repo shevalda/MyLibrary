@@ -5,4 +5,8 @@ class Bookshelf
     @rows = Array.new(num_of_row) { [] }
     @columns = num_of_columns
   end
+
+  def put_book(book)
+    [1, 1]
+  end
 end
