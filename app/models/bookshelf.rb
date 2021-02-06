@@ -3,6 +3,7 @@ class Bookshelf
 
   def initialize(num_of_row, num_of_columns)
     raise 'Invalid row number' unless num_of_row.positive?
+    raise 'Invalid column number' unless num_of_columns.positive?
 
     @rows = Array.new(num_of_row) { [] }
     @columns = num_of_columns
