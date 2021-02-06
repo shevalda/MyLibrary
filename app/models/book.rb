@@ -10,4 +10,8 @@ class Book
   def title_include?(keyword)
     @title.downcase.include?(keyword.downcase)
   end
+
+  def author_include?(keyword)
+    @author.include?(keyword)
+  end
 end

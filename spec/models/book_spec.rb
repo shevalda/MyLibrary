@@ -35,4 +35,14 @@ RSpec.describe Book do
       end
     end
   end
+
+  context '#author_include?' do
+    context "with \"J. K. Rowling\" as the book's author" do
+      it "returns true if author keyword is 'Rowling'" do
+        book = described_class.new(title, author, isbn)
+        keyword = 'Rowling'
+        expect(book.author_include?(keyword)).to eq(true)
+      end
+    end
+  end
 end
