@@ -27,6 +27,12 @@ RSpec.describe Book do
         keyword = 'harry'
         expect(book.title_include?(keyword)).to eq(true)
       end
+
+      it "returns false if title keyword is 'Hermione'" do
+        book = described_class.new(title, author, isbn)
+        keyword = 'Hermione'
+        expect(book.title_include?(keyword)).to eq(false)
+      end
     end
   end
 end
