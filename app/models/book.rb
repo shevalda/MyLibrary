@@ -12,6 +12,6 @@ class Book
   end
 
   def author_include?(keyword)
-    @author.include?(keyword)
+    @author.downcase.include?(keyword.downcase)
   end
 end
