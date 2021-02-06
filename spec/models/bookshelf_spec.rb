@@ -12,6 +12,12 @@ RSpec.describe Bookshelf do
         expect(bookshelf.columns).to eq(input_col)
       end
     end
+
+    it 'raises an Error if input row is 0' do
+      input_row = 0
+      input_col = 3
+      expect { described_class.new(input_row, input_col) }.to raise_error('Invalid row number')
+    end
   end
 
   context '#put_book' do
