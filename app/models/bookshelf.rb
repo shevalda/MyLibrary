@@ -10,6 +10,8 @@ class Bookshelf
   def put_book(book)
     @last_position[1] += 1
     if @last_position[1] > @columns
+      return false if @last_position[0] + 1 > @rows.length
+
       @last_position[0] += 1
       @last_position[1] = 1
     end

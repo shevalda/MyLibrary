@@ -50,5 +50,17 @@ RSpec.describe Bookshelf do
         expect(result).to eq([2, 1])
       end
     end
+
+    context 'with all rows full' do
+      before do
+        @bookshelf = described_class.new(1, 1)
+        @bookshelf.put_book(@book)
+      end
+
+      it 'returns false when put another book' do
+        result = @bookshelf.put_book(@book)
+        expect(result).to eq(false)
+      end
+    end
   end
 end
