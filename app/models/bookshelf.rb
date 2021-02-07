@@ -21,4 +21,8 @@ class Bookshelf
     @rows[@last_position[0] - 1] << book
     @last_position
   end
+
+  def take_book_from(row, column)
+    @rows[row - 1][column - 1]
+  end
 end
