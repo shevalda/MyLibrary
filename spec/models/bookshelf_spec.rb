@@ -91,6 +91,7 @@ RSpec.describe Bookshelf do
   context '#take_book_from' do
     before do
       @book = Book.new('title', 'author', '123456789')
+      @book_two = Book.new('title 2', 'author name', '123456789')
     end
 
     context 'with only one book in bookshelf' do
@@ -107,6 +108,19 @@ RSpec.describe Bookshelf do
       it 'no book is placed in row 1, column 1 when it was taken' do
         @bookshelf.take_book_from(1, 1)
         expect(@bookshelf.rows[0][0]).to eq(nil)
+      end
+    end
+
+    context 'with two books in bookshelf' do
+      before do
+        @bookshelf = described_class.new(1, 2)
+        @bookshelf.put_book(@book)
+        @bookshelf.put_book(@book_two)
+      end
+
+      it 'returns the book in row 1, column 1 when it is taken' do
+        result = @bookshelf.take_book_from(1, 1)
+        expect(result).to eq(@book)
       end
     end
   end
