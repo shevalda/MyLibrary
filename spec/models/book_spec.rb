@@ -53,4 +53,11 @@ RSpec.describe Book do
       end
     end
   end
+
+  context '#info' do
+    it "returns 'isbn | title | author' " do
+      result = @book.info
+      expect(result).to eq("#{@isbn} | #{@title} | #{@author}")
+    end
+  end
 end

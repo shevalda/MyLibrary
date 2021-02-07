@@ -14,4 +14,8 @@ class Book
   def author_include?(keyword)
     @author.downcase.include?(keyword.downcase)
   end
+
+  def info
+    "#{@isbn} | #{@title} | #{@author}"
+  end
 end
