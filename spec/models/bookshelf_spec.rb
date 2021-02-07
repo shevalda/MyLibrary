@@ -140,6 +140,12 @@ RSpec.describe Bookshelf do
       @book_two = Book.new('title 2', 'author name', '123456789')
     end
 
+    it 'returns nil if no book is placed at the selected location' do
+      @bookshelf = described_class.new(1, 1)
+      result = @bookshelf.take_book_from(1, 1)
+      expect(result).to be_nil
+    end
+
     context 'with only one book in bookshelf' do
       before do
         @bookshelf = described_class.new(1, 1)
