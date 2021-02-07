@@ -8,8 +8,8 @@ RSpec.describe Bookshelf do
         input_row = 2
         input_col = 3
         bookshelf = described_class.new(input_row, input_col)
-        expect(bookshelf.rows.length).to eq(input_row)
-        expect(bookshelf.columns).to eq(input_col)
+        expect(bookshelf.rows_size).to eq(input_row)
+        expect(bookshelf.columns_size).to eq(input_col)
       end
     end
 
@@ -121,7 +121,8 @@ RSpec.describe Bookshelf do
 
       it 'no book is placed in row 1, column 1 when it was taken' do
         @bookshelf.take_book_from(1, 1)
-        expect(@bookshelf.rows[0][0]).to eq(nil)
+        rows = @bookshelf.instance_variable_get :@rows
+        expect(rows[0][0]).to eq(nil)
       end
     end
 
