@@ -195,5 +195,16 @@ RSpec.describe Bookshelf do
       result = @bookshelf.find_book('123456789')
       expect(result).to eq([1, 1])
     end
+
+    context 'more than one book with ISBN 123456789' do
+      before do
+        @bookshelf.put_book(@book)
+      end
+
+      it 'returns [1, 1] for book with ISBN 123456789' do
+        result = @bookshelf.find_book('123456789')
+        expect(result).to eq([1, 1])
+      end
+    end
   end
 end
