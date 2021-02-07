@@ -44,6 +44,10 @@ class Bookshelf
     nil
   end
 
+  def list_books
+    []
+  end
+
   private
 
   def put_book_in_sparse_position(book)

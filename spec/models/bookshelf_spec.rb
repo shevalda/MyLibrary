@@ -212,4 +212,15 @@ RSpec.describe Bookshelf do
       end
     end
   end
+
+  context '#list_books' do
+    before do
+      @bookshelf = described_class.new(1, 1)
+    end
+
+    it 'returns [] if no book is present' do
+      result = @bookshelf.list_books
+      expect(result).to eq([])
+    end
+  end
 end
