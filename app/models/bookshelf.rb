@@ -26,6 +26,8 @@ class Bookshelf
   end
 
   def take_book_from(row, column)
+    return nil if row > rows_size || column > columns_size
+
     book = @rows[row - 1][column - 1]
     @rows[row - 1][column - 1] = nil
     update_positions(row, column)
