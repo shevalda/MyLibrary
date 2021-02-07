@@ -146,12 +146,16 @@ RSpec.describe Bookshelf do
       expect(result).to be_nil
     end
 
-    it 'returns nil if the selected location is invalid' do
+    it 'returns false if the selected location is invalid' do
       @bookshelf = described_class.new(1, 1)
       result = @bookshelf.take_book_from(2, 1)
-      expect(result).to be_nil
+      expect(result).to eq(false)
       result = @bookshelf.take_book_from(1, 2)
-      expect(result).to be_nil
+      expect(result).to eq(false)
+      result = @bookshelf.take_book_from(0, 1)
+      expect(result).to eq(false)
+      result = @bookshelf.take_book_from(1, 0)
+      expect(result).to eq(false)
     end
 
     context 'with only one book in bookshelf' do
