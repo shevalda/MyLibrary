@@ -81,6 +81,12 @@ RSpec.describe Bookshelf do
         result = @bookshelf.put_book(@book)
         expect(result).to eq([1, 2])
       end
+
+      it 'returns [1, 1] when the first book put in bookshelf is taken' do
+        @bookshelf.take_book_from(1, 1)
+        result = @bookshelf.put_book(@book)
+        expect(result).to eq([1, 1])
+      end
     end
 
     context 'with all rows full' do
