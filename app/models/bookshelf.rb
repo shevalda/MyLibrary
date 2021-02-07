@@ -65,7 +65,13 @@ class Bookshelf
   end
 
   def search_books_by_author(keyword)
-    []
+    matching_position_books = []
+    @rows.each_with_index do |row, row_index|
+      row.each_with_index do |book, column_index|
+        matching_position_books << [row_index + 1, column_index + 1, book] if book&.author_include? keyword
+      end
+    end
+    matching_position_books
   end
 
   private
