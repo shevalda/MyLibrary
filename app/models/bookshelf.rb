@@ -23,6 +23,8 @@ class Bookshelf
   end
 
   def take_book_from(row, column)
-    @rows[row - 1][column - 1]
+    book = @rows[row - 1][column - 1]
+    @rows[row - 1][column - 1] = nil
+    book
   end
 end

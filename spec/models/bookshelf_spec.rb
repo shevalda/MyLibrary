@@ -103,6 +103,11 @@ RSpec.describe Bookshelf do
         result = @bookshelf.take_book_from(1, 1)
         expect(result).to eq(@book)
       end
+
+      it 'no book is placed in row 1, column 1 when it was taken' do
+        @bookshelf.take_book_from(1, 1)
+        expect(@bookshelf.rows[0][0]).to eq(nil)
+      end
     end
   end
 end
