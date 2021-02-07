@@ -54,6 +54,10 @@ class Bookshelf
     position_books
   end
 
+  def search_books_by_title(keyword)
+    []
+  end
+
   private
 
   def put_book_in_sparse_position(book)
