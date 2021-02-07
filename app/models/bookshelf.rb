@@ -35,6 +35,14 @@ class Bookshelf
     book
   end
 
+  def find_book(isbn)
+    @rows.each_with_index do |row, row_index|
+      row.each_with_index do |book, column_index|
+        return [row_index + 1, column_index + 1] if book.isbn == isbn
+      end
+    end
+  end
+
   private
 
   def put_book_in_sparse_position(book)
