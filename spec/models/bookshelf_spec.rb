@@ -216,11 +216,18 @@ RSpec.describe Bookshelf do
   context '#list_books' do
     before do
       @bookshelf = described_class.new(1, 1)
+      @book = Book.new('title', 'author', '123456789')
     end
 
     it 'returns [] if no book is present' do
       result = @bookshelf.list_books
       expect(result).to eq([])
+    end
+
+    it 'returns list of [row, column, book] when there is at least one book' do
+      @bookshelf.put_book(@book)
+      result = @bookshelf.list_books
+      expect(result).to eq([[1, 1, @book]])
     end
   end
 end
