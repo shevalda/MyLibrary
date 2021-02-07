@@ -248,4 +248,16 @@ RSpec.describe Bookshelf do
       expect(result).to eq([[1, 1, @book]])
     end
   end
+
+  context '#search_books_by_author' do
+    before do
+      @bookshelf = described_class.new(1, 1)
+      @book = Book.new('title', 'author', '123456789')
+    end
+
+    it 'returns [] if no book in Bookshelf match the keyword' do
+      result = @bookshelf.search_books_by_author('penulis')
+      expect(result).to eq([])
+    end
+  end
 end
