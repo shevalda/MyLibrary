@@ -25,6 +25,7 @@ class Bookshelf
   def take_book_from(row, column)
     book = @rows[row - 1][column - 1]
     @rows[row - 1][column - 1] = nil
+    @last_position[1] -= 1 if @last_position == [row, column]
     book
   end
 end
