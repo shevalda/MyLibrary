@@ -106,6 +106,19 @@ RSpec.describe Bookshelf do
           expect(result).to eq([1, 1])
         end
       end
+
+      context 'and books from the last rows are taken' do
+        before do
+          @bookshelf.take_book_from(3, 1)
+        end
+
+        it 'returns [2, 1] when the last two book from the last full row is taken' do
+          @bookshelf.take_book_from(2, 2)
+          @bookshelf.take_book_from(2, 1)
+          result = @bookshelf.put_book(@book)
+          expect(result).to eq([2, 1])
+        end
+      end
     end
 
     context 'with all rows full' do
