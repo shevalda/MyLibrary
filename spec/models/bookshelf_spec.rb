@@ -196,6 +196,11 @@ RSpec.describe Bookshelf do
       expect(result).to eq([1, 1])
     end
 
+    it 'returns nil for a book that is not present in Bookshelf' do
+      result = @bookshelf.find_book('1')
+      expect(result).to be_nil
+    end
+
     context 'more than one book with ISBN 123456789' do
       before do
         @bookshelf.put_book(@book)
