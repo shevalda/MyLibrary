@@ -58,6 +58,7 @@ class Bookshelf
       @last_position[1] -= 1
     else
       @sparse_positions << [row, column]
+      @sparse_positions.sort!
     end
   end
 end

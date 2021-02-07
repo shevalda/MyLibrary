@@ -89,6 +89,25 @@ RSpec.describe Bookshelf do
       end
     end
 
+    context 'with some rows full' do
+      before do
+        @bookshelf = described_class.new(3, 2)
+        5.times do
+          @bookshelf.put_book(@book)
+        end
+      end
+
+      context 'when some books are taken with no order' do
+        it 'returns [1, 1] when taken books includes row 1, column 1' do
+          @bookshelf.take_book_from(2, 1)
+          @bookshelf.take_book_from(1, 1)
+          @bookshelf.take_book_from(2, 2)
+          result = @bookshelf.put_book(@book)
+          expect(result).to eq([1, 1])
+        end
+      end
+    end
+
     context 'with all rows full' do
       before do
         @bookshelf = described_class.new(1, 1)
