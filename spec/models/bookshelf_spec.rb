@@ -47,7 +47,7 @@ RSpec.describe Bookshelf do
       it 'returns [1, 1] when put a book' do
         bookshelf = described_class.new(1, 1)
         result = bookshelf.put_book(@book)
-        expect(result).to eq([1, 1])
+        expect(result).to eq({ row: 1, column: 1 })
       end
     end
 
@@ -59,7 +59,7 @@ RSpec.describe Bookshelf do
 
       it 'returns [1, 2] when put another book' do
         result = @bookshelf.put_book(@book)
-        expect(result).to eq([1, 2])
+        expect(result).to eq({ row: 1, column: 2 })
       end
     end
 
@@ -73,19 +73,19 @@ RSpec.describe Bookshelf do
 
       it 'returns [2, 1] when put another book' do
         result = @bookshelf.put_book(@book)
-        expect(result).to eq([2, 1])
+        expect(result).to eq({ row: 2, column: 1 })
       end
 
       it 'returns [1, 2] when the last book put in bookshelf is taken' do
         @bookshelf.take_book_from(1, 2)
         result = @bookshelf.put_book(@book)
-        expect(result).to eq([1, 2])
+        expect(result).to eq({ row: 1, column: 2 })
       end
 
       it 'returns [1, 1] when the first book put in bookshelf is taken' do
         @bookshelf.take_book_from(1, 1)
         result = @bookshelf.put_book(@book)
-        expect(result).to eq([1, 1])
+        expect(result).to eq({ row: 1, column: 1 })
       end
     end
 
@@ -103,7 +103,7 @@ RSpec.describe Bookshelf do
           @bookshelf.take_book_from(1, 1)
           @bookshelf.take_book_from(2, 2)
           result = @bookshelf.put_book(@book)
-          expect(result).to eq([1, 1])
+          expect(result).to eq({ row: 1, column: 1 })
         end
       end
 
@@ -116,7 +116,7 @@ RSpec.describe Bookshelf do
           @bookshelf.take_book_from(2, 2)
           @bookshelf.take_book_from(2, 1)
           result = @bookshelf.put_book(@book)
-          expect(result).to eq([2, 1])
+          expect(result).to eq({ row: 2, column: 1 })
         end
       end
     end

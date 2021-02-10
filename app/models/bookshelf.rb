@@ -4,8 +4,8 @@ class Bookshelf
     raise 'Invalid column number' unless num_of_columns.positive?
 
     @rows = Array.new(num_of_row) { Array.new(num_of_columns) }
-    @last_position = [1, 0]
-    @sparse_positions = []
+    @last_position = { row: 1, column: 0 }
+    @sparse_positions = {}
   end
 
   def rows_size
@@ -21,7 +21,7 @@ class Bookshelf
     return false if full?
 
     increment_last_position
-    @rows[@last_position[0] - 1][@last_position[1] - 1] = book
+    @rows[@last_position[:row] - 1][@last_position[:column] - 1] = book
     @last_position
   end
 
@@ -77,30 +77,45 @@ class Bookshelf
   private
 
   def put_book_in_sparse_position(book)
-    position = @sparse_positions.shift
-    @rows[position[0]][position[1]] = book
+    position = pop_sparse_position
+    @rows[position[:row]][position[:column]] = book
     position
   end
 
   def full?
-    @last_position == [rows_size, columns_size]
+    @last_position == { row: rows_size, column: columns_size }
   end
 
   def increment_last_position
-    if @last_position[1] < columns_size
-      @last_position[1] += 1
+    if @last_position[:column] < columns_size
+      @last_position[:column] += 1
     else
-      @last_position[0] += 1
-      @last_position[1] = 1
+      @last_position[:row] += 1
+      @last_position[:column] = 1
     end
   end
 
   def update_positions(row, column)
-    if @last_position == [row, column]
-      @last_position[1] -= 1
+    if @last_position == { row: row, column: column }
+      @last_position[:column] -= 1
     else
-      @sparse_positions << [row, column]
-      @sparse_positions.sort!
+      push_sparse_position(row, column)
     end
+  end
+
+  def push_sparse_position(row, column)
+    if @sparse_positions[row].nil?
+      @sparse_positions[row] = [column]
+    else
+      @sparse_positions[row] << column
+      @sparse_positions[row].sort!
+    end
+  end
+
+  def pop_sparse_position
+    row = @sparse_positions.keys.min
+    column = @sparse_positions[row].shift
+    @sparse_positions.delete(row) if @sparse_positions[row].length.zero?
+    { row: row, column: column }
   end
 end
