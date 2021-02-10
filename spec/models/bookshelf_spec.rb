@@ -259,7 +259,7 @@ RSpec.describe Bookshelf do
     it 'returns list of [row, column, book] if there is at least one book title matches' do
       @bookshelf.put_book(@book)
       result = @bookshelf.search_books_by_title('ti')
-      expect(result).to eq([[1, 1, @book]])
+      expect(result).to eq([{ row: 1, column: 1, book: @book }])
     end
   end
 
