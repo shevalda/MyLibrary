@@ -48,7 +48,7 @@ class Bookshelf
     position_books = []
     @rows.each_with_index do |row, row_index|
       row.each_with_index do |book, column_index|
-        position_books << [row_index + 1, column_index + 1, book] unless book.nil?
+        position_books << { row: row_index + 1, column: column_index + 1, book: book } unless book.nil?
       end
     end
     position_books

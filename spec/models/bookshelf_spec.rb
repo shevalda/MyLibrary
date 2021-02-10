@@ -241,7 +241,7 @@ RSpec.describe Bookshelf do
     it 'returns list of [row, column, book] when there is at least one book' do
       @bookshelf.put_book(@book)
       result = @bookshelf.list_books
-      expect(result).to eq([[1, 1, @book]])
+      expect(result).to eq([{ row: 1, column: 1, book: @book }])
     end
   end
 
