@@ -207,7 +207,7 @@ RSpec.describe Bookshelf do
 
     it 'returns [1, 1] for book with ISBN 123456789' do
       result = @bookshelf.find_book('123456789')
-      expect(result).to eq([1, 1])
+      expect(result).to eq({ row: 1, column: 1 })
     end
 
     it 'returns nil for a book that is not present in Bookshelf' do
@@ -222,7 +222,7 @@ RSpec.describe Bookshelf do
 
       it 'returns [1, 1] for book with ISBN 123456789' do
         result = @bookshelf.find_book('123456789')
-        expect(result).to eq([1, 1])
+        expect(result).to eq({ row: 1, column: 1 })
       end
     end
   end
