@@ -6,6 +6,10 @@ RSpec.describe Library do
       expect { described_class.new(2, 0, 3) }.to raise_error('Invalid row number')
     end
 
+    it 'raises an error is number of column is invalid' do
+      expect { described_class.new(2, 1, 0) }.to raise_error('Invalid column number')
+    end
+
     context 'with invalid number of bookshelves' do
       it 'raises an Error if number of bookshelves is zero' do
         expect { described_class.new(0, 1, 3) }.to raise_error('Invalid number of bookhelves')
