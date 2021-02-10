@@ -2,6 +2,10 @@ require './app/models/library'
 
 RSpec.describe Library do
   context '#initialize' do
+    it 'raises an error is number of row is invalid' do
+      expect { described_class.new(2, 0, 3) }.to raise_error('Invalid row number')
+    end
+
     context 'with invalid number of bookshelves' do
       it 'raises an Error if number of bookshelves is zero' do
         expect { described_class.new(0, 1, 3) }.to raise_error('Invalid number of bookhelves')
