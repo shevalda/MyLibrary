@@ -72,5 +72,13 @@ RSpec.describe Library do
         expect(result).to eq({ shelf: 2, row: 1, column: 1 })
       end
     end
+
+    context 'when all bookshelves are full' do
+      it 'returns false' do
+        allow_any_instance_of(Bookshelf).to receive(:put_book).and_return(false)
+        result = @library.put_book(book)
+        expect(result).to eq(false)
+      end
+    end
   end
 end

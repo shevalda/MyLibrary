@@ -17,5 +17,6 @@ class Library
       row_column_position = bookshelf.put_book(book)
       return { shelf: shelf_position }.merge(row_column_position) if row_column_position
     end
+    false
   end
 end
