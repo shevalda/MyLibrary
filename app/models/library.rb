@@ -21,6 +21,8 @@ class Library
   end
 
   def take_book_from(shelf, row, column)
+    raise ArgumentError unless shelf.positive?
+
     @bookshelves[shelf - 1].take_book_from(row, column)
   end
 end
