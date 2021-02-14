@@ -41,19 +41,21 @@ RSpec.describe Library do
   context '#put_book' do
     let(:book) { double }
 
+    before do
+      @library = described_class.new(2, 1, 3)
+    end
+
     context 'with empty bookshelves' do
       it 'returns book location on the first avaiable space on first shelf' do
-        library = described_class.new(2, 1, 3)
-        result = library.put_book(book)
+        result = @library.put_book(book)
         expect(result).to eq({ shelf: 1, row: 1, column: 1 })
       end
     end
 
     context 'with some unavailable spaces on the first bookshelf' do
       it 'returns book location of the first available space' do
-        library = described_class.new(2, 1, 3)
         allow_any_instance_of(Bookshelf).to receive(:put_book).and_return({ row: 2, column: 2 })
-        result = library.put_book(book)
+        result = @library.put_book(book)
         expect(result).to eq({ shelf: 1, row: 2, column: 2 })
       end
     end
