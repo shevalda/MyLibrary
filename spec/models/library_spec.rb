@@ -118,4 +118,10 @@ RSpec.describe Library do
       expect(result).to be_nil
     end
   end
+
+  context '#list_books' do
+    it 'returns [] when all bookshelves are empty' do
+      expect(library.list_books).to eq([])
+    end
+  end
 end

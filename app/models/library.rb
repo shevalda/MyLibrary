@@ -34,6 +34,10 @@ class Library
     nil
   end
 
+  def list_books
+    []
+  end
+
   private
 
   def bookshelves_count
