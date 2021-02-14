@@ -30,8 +30,10 @@ class Bookshelf
     return false if column > columns_size || column <= 0
 
     book = @rows[row - 1][column - 1]
-    @rows[row - 1][column - 1] = nil
-    update_positions(row, column)
+    unless book.nil?
+      @rows[row - 1][column - 1] = nil
+      update_positions(row, column)
+    end
     book
   end
 

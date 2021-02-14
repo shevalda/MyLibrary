@@ -196,6 +196,14 @@ RSpec.describe Bookshelf do
         expect(result).to eq(@book)
       end
     end
+
+    context 'with position of empty book' do
+      it 'returns nil' do
+        @bookshelf = described_class.new(1, 2)
+        result = @bookshelf.take_book_from(1, 1)
+        expect(result).to be_nil
+      end
+    end
   end
 
   context '#find_book' do
