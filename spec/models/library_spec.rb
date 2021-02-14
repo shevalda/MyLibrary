@@ -165,4 +165,11 @@ RSpec.describe Library do
       end
     end
   end
+
+  context '#search_books_by_author' do
+    it 'returns [] if no book is found with the author keyword' do
+      result = library.search_books_by_author('author')
+      expect(result).to eq([])
+    end
+  end
 end
