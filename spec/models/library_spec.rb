@@ -37,4 +37,16 @@ RSpec.describe Library do
       end
     end
   end
+
+  context '#put_book' do
+    let(:book) { double }
+
+    context 'with empty bookshelves' do
+      it 'returns book location on the first avaiable space on first shelf' do
+        library = described_class.new(2, 1, 3)
+        result = library.put_book(book)
+        expect(result).to eq({ shelf: 1, row: 1, column: 1 })
+      end
+    end
+  end
 end

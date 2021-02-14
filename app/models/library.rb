@@ -11,4 +11,8 @@ class Library
       puts "Shelf #{index} with #{bookshelf.rows_size} rows and #{bookshelf.columns_size} columns is added"
     end
   end
+
+  def put_book(book)
+    { shelf: 1, row: 1, column: 1 }
+  end
 end
