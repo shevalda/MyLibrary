@@ -90,6 +90,10 @@ RSpec.describe Library do
       it 'raises ArgumentError if shelf position is less than 1' do
         expect { library.take_book_from(0, 1, 1) }.to raise_error(ArgumentError)
       end
+
+      it 'raises ArgumentError if shelf position is larger than the number of shelves' do
+        expect { library.take_book_from(3, 1, 1) }.to raise_error(ArgumentError)
+      end
     end
   end
 end

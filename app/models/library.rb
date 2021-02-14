@@ -21,8 +21,14 @@ class Library
   end
 
   def take_book_from(shelf, row, column)
-    raise ArgumentError unless shelf.positive?
+    raise ArgumentError unless shelf.positive? && shelf <= bookshelves_count
 
     @bookshelves[shelf - 1].take_book_from(row, column)
+  end
+
+  private
+
+  def bookshelves_count
+    @bookshelves.count
   end
 end
