@@ -13,6 +13,9 @@ class Library
   end
 
   def put_book(book)
-    { shelf: 1, row: 1, column: 1 }
+    @bookshelves.each.with_index(1) do |bookshelf, shelf_position|
+      row_column_position = bookshelf.put_book(book)
+      return { shelf: shelf_position }.merge(row_column_position)
+    end
   end
 end
