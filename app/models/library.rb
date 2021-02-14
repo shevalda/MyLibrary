@@ -19,4 +19,8 @@ class Library
     end
     false
   end
+
+  def take_book_from(shelf, row, column)
+    @bookshelves[shelf - 1].take_book_from(row, column)
+  end
 end

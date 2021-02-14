@@ -1,6 +1,8 @@
 require './app/models/library'
 
 RSpec.describe Library do
+  let(:book) { double }
+
   context '#initialize' do
     it 'raises an error is number of row is invalid' do
       expect { described_class.new(2, 0, 3) }.to raise_error('Invalid row number')
@@ -39,8 +41,6 @@ RSpec.describe Library do
   end
 
   context '#put_book' do
-    let(:book) { double }
-
     before do
       @library = described_class.new(2, 1, 3)
     end
@@ -79,6 +79,18 @@ RSpec.describe Library do
         result = @library.put_book(book)
         expect(result).to eq(false)
       end
+    end
+  end
+
+  context '#take_book_from' do
+    before do
+      @library = described_class.new(2, 1, 3)
+    end
+
+    it 'returns Book when the selected positon has a book' do
+      allow_any_instance_of(Bookshelf).to receive(:take_book_from).and_return(book)
+      result = @library.take_book_from(1, 1, 1)
+      expect(result).to eq(book)
     end
   end
 end
