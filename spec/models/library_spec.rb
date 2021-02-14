@@ -59,5 +59,18 @@ RSpec.describe Library do
         expect(result).to eq({ shelf: 1, row: 2, column: 2 })
       end
     end
+
+    context 'when some bookshelves already full' do
+      before do
+        3.times do
+          @library.put_book(book)
+        end
+      end
+
+      it 'return book location of the next bookshelf with available space' do
+        result = @library.put_book(book)
+        expect(result).to eq({ shelf: 2, row: 1, column: 1 })
+      end
+    end
   end
 end
