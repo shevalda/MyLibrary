@@ -123,5 +123,22 @@ RSpec.describe Library do
     it 'returns [] when all bookshelves are empty' do
       expect(library.list_books).to eq([])
     end
+
+    context 'when there are books on the bookshelves' do
+      before do
+        @library = described_class.new(2, 1, 1)
+        allow_any_instance_of(Bookshelf).to(
+          receive(:list_books).and_return([{ row: 1, column: 1, book: book }])
+        )
+      end
+
+      it 'returns list of books and their shelf, row, and column position' do
+        expected_output = [
+          { shelf: 1, list_books: [{ row: 1, column: 1, book: book }] },
+          { shelf: 2, list_books: [{ row: 1, column: 1, book: book }] }
+        ]
+        expect(library.list_books).to eq(expected_output)
+      end
+    end
   end
 end

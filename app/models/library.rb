@@ -35,7 +35,14 @@ class Library
   end
 
   def list_books
-    []
+    list = []
+    @bookshelves.each.with_index(1) do |bookshelf, shelf_position|
+      shelf_list_books = bookshelf.list_books
+      next if shelf_list_books.empty?
+
+      list << { shelf: shelf_position, list_books: bookshelf.list_books }
+    end
+    list
   end
 
   private
