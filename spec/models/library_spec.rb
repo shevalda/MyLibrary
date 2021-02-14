@@ -94,6 +94,10 @@ RSpec.describe Library do
       it 'raises ArgumentError if shelf position is larger than the number of shelves' do
         expect { library.take_book_from(3, 1, 1) }.to raise_error(ArgumentError)
       end
+
+      it 'returns false if row position is invalid' do
+        expect(library.take_book_from(1, 5, 1)).to be(false)
+      end
     end
   end
 end
