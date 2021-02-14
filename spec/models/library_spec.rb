@@ -141,4 +141,11 @@ RSpec.describe Library do
       end
     end
   end
+
+  context '#search_books_by_title' do
+    it 'returns [] if no book is found with the title keyword' do
+      result = library.search_books_by_title('title')
+      expect(result).to eq([])
+    end
+  end
 end

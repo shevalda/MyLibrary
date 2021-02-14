@@ -45,6 +45,10 @@ class Library
     list
   end
 
+  def search_books_by_title(title)
+    []
+  end
+
   private
 
   def bookshelves_count
