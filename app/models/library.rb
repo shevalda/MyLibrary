@@ -31,6 +31,7 @@ class Library
       row_column_position = bookshelf.find_book(isbn)
       return { shelf: shelf_position }.merge(row_column_position) if row_column_position
     end
+    nil
   end
 
   private

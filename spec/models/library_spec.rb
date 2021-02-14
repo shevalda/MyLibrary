@@ -111,5 +111,11 @@ RSpec.describe Library do
       result = library.find_book('1234567890')
       expect(result).to eq({ shelf: 1, row: 1, column: 1 })
     end
+
+    it 'returns nil if the book is not found' do
+      allow_any_instance_of(Bookshelf).to receive(:find_book).and_return(nil)
+      result = library.find_book('1234567890')
+      expect(result).to be_nil
+    end
   end
 end
