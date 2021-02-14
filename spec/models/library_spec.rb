@@ -147,5 +147,22 @@ RSpec.describe Library do
       result = library.search_books_by_title('title')
       expect(result).to eq([])
     end
+
+    context 'when there are books that matches with the title' do
+      before do
+        @library = described_class.new(2, 1, 1)
+        allow_any_instance_of(Bookshelf).to(
+          receive(:search_books_by_title).and_return([{ row: 1, column: 1, book: book }])
+        )
+      end
+
+      it 'returns list of books and their shelf, row, and column position' do
+        expected_output = [
+          { shelf: 1, list_books: [{ row: 1, column: 1, book: book }] },
+          { shelf: 2, list_books: [{ row: 1, column: 1, book: book }] }
+        ]
+        expect(library.search_books_by_title('title')).to eq(expected_output)
+      end
+    end
   end
 end
