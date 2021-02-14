@@ -98,6 +98,10 @@ RSpec.describe Library do
       it 'returns false if row position is invalid' do
         expect(library.take_book_from(1, 5, 1)).to be(false)
       end
+
+      it 'returns false if column position is invalid' do
+        expect(library.take_book_from(1, 1, 5)).to be(false)
+      end
     end
   end
 end
