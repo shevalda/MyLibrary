@@ -104,4 +104,12 @@ RSpec.describe Library do
       end
     end
   end
+
+  context '#find_book' do
+    it 'returns shelf, row, and, column position if the book is found' do
+      allow_any_instance_of(Bookshelf).to receive(:find_book).and_return({ row: 1, column: 1 })
+      result = library.find_book('1234567890')
+      expect(result).to eq({ shelf: 1, row: 1, column: 1 })
+    end
+  end
 end

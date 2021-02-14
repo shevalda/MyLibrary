@@ -26,6 +26,13 @@ class Library
     @bookshelves[shelf - 1].take_book_from(row, column)
   end
 
+  def find_book(isbn)
+    @bookshelves.each.with_index(1) do |bookshelf, shelf_position|
+      row_column_position = bookshelf.find_book(isbn)
+      return { shelf: shelf_position }.merge(row_column_position) if row_column_position
+    end
+  end
+
   private
 
   def bookshelves_count
