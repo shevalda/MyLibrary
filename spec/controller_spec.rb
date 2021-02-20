@@ -13,6 +13,12 @@ RSpec.describe Controller do
         TEXT
         expect(controller.execute(input)).to eq(expected_output)
       end
+
+      it 'returns error with invalid param' do
+        input = 'build_library|0|1|3'
+        expected_output = 'Invalid number of bookhelves'
+        expect(controller.execute(input)).to eq(expected_output)
+      end
     end
   end
 end

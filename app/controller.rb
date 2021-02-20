@@ -25,6 +25,6 @@ class Controller
     end
     output.join("\n")
   rescue StandardError => e
-    e
+    e.message
   end
 end
