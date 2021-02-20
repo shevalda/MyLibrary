@@ -29,14 +29,6 @@ RSpec.describe Library do
         expect(library.bookshelves[0].rows_size).to eq(1)
         expect(library.bookshelves[0].columns_size).to eq(3)
       end
-
-      it "prints 'Shelf N with 1 rows and 3 columns is added' twice" do
-        expected_output = <<~TEXT
-          Shelf 1 with 1 rows and 3 columns is added
-          Shelf 2 with 1 rows and 3 columns is added
-        TEXT
-        expect { library }.to output(expected_output).to_stdout
-      end
     end
   end
 
