@@ -1,8 +1,15 @@
 require './app/command_parser'
+require './app/output_utility'
 require './app/models/library'
+require './app/models/book'
 
 class Controller
   include CommandParser
+  include OutputUtility
+
+  def initialize
+    @library = nil
+  end
 
   def execute(input)
     command = parse_command(input)
@@ -10,7 +17,12 @@ class Controller
     if command == 'build_library'
       build_library(input)
     elsif @library.nil?
-      'Library is not built yet' if @library.nil?
+      return 'Library is not built yet' if @library.nil?
+    else
+      case command
+      when 'put_book'
+        put_book(input)
+      end
     end
   end
 
@@ -27,5 +39,13 @@ class Controller
     output.join("\n")
   rescue StandardError => e
     e.message
+  end
+
+  def put_book(input)
+    params = parse_put_book_command(input)
+    book = Book.new(params[:title], params[:author], params[:isbn])
+    result = @library.put_book(book)
+
+    put_book_output(result[:shelf], result[:row], result[:column])
   end
 end

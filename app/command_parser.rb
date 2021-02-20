@@ -11,4 +11,9 @@ module CommandParser
       column_size: Integer(column_size)
     }
   end
+
+  def parse_put_book_command(input)
+    _, isbn, title, author = input.split('|')
+    { isbn: isbn, title: title, author: author }
+  end
 end
