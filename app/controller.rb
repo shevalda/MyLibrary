@@ -7,9 +7,10 @@ class Controller
   def execute(input)
     command = parse_command(input)
 
-    case command
-    when 'build_library'
+    if command == 'build_library'
       build_library(input)
+    elsif @library.nil?
+      'Library is not built yet' if @library.nil?
     end
   end
 

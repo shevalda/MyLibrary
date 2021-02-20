@@ -4,6 +4,14 @@ RSpec.describe Controller do
   subject(:controller) { Controller.new }
 
   context '#execute' do
+    context 'no library is built yet' do
+      it "returns the warning when not executing command 'build_library'" do
+        input = 'put_book|9780747532743|Harry Potter 1|J. K. Rowling'
+        expected_output = 'Library is not built yet'
+        expect(controller.execute(input)).to eq(expected_output)
+      end
+    end
+
     context "with 'build_library' command" do
       it 'returns shelf information with valid shelf, row, and column params' do
         input = 'build_library|2|1|3'
