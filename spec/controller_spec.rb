@@ -47,6 +47,12 @@ RSpec.describe Controller do
         expected_output = 'All bookshelves are full'
         expect(@controller.execute(input)).to eq(expected_output)
       end
+
+      it 'returns warning when arguements count is not 4' do
+        input = 'put_book|9780747532743|Harry Potter 1'
+        expected_output = 'Expected 4 arguments, given 3'
+        expect(@controller.execute(input)).to eq(expected_output)
+      end
     end
   end
 end

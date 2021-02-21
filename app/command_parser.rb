@@ -3,6 +3,11 @@ module CommandParser
     input.split('|').first
   end
 
+  def check_command_length(input, expected_count)
+    arguements_length = input.split('|').length
+    raise "Expected #{expected_count} arguments, given #{arguements_length}" if arguements_length != expected_count
+  end
+
   def parse_build_library_command(input)
     _, bookshelf_count, row_size, column_size = input.split('|')
     {

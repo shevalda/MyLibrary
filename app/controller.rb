@@ -42,6 +42,8 @@ class Controller
   end
 
   def put_book(input)
+    check_command_length(input, 4)
+
     params = parse_put_book_command(input)
     book = Book.new(params[:title], params[:author], params[:isbn])
     result = @library.put_book(book)
@@ -51,5 +53,7 @@ class Controller
     else
       'All bookshelves are full'
     end
+  rescue StandardError => e
+    e.message
   end
 end
