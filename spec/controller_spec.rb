@@ -109,6 +109,12 @@ RSpec.describe Controller do
         expected_output = 'Book not found!'
         expect(@controller.execute(input)).to eq(expected_output)
       end
+      
+      it 'returns warning when arguments count is not 2' do
+        input = 'find_book'
+        expected_output = 'Expected 2 arguments, given 1'
+        expect(@controller.execute(input)).to eq(expected_output)
+      end
     end
   end
 end

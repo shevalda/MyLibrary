@@ -71,6 +71,8 @@ class Controller
   end
 
   def find_book(input)
+    check_command_length(input, 2)
+
     isbn = parse_find_book(input)
     position = @library.find_book(isbn)
 
