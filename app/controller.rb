@@ -24,6 +24,8 @@ class Controller
         put_book(input)
       end
     end
+  rescue StandardError => e
+    e.message
   end
 
   private
@@ -35,8 +37,6 @@ class Controller
     @library = Library.new(params[:bookshelf_count], params[:row_size], params[:column_size])
 
     build_library_output(params[:bookshelf_count], params[:row_size], params[:column_size])
-  rescue StandardError => e
-    e.message
   end
 
   def put_book(input)
@@ -51,7 +51,5 @@ class Controller
     else
       'All bookshelves are full'
     end
-  rescue StandardError => e
-    e.message
   end
 end
