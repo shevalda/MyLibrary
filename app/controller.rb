@@ -24,6 +24,8 @@ class Controller
         put_book(input)
       when 'take_book_from'
         take_book_from(input)
+      when 'find_book'
+        find_book(input)
       end
     end
   rescue StandardError => e
@@ -66,5 +68,12 @@ class Controller
     else
       'Book cannot be taken'
     end
+  end
+
+  def find_book(input)
+    isbn = parse_find_book(input)
+    position = @library.find_book(isbn)
+
+    find_book_output(position[:shelf], position[:row], position[:column])
   end
 end

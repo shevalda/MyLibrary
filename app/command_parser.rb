@@ -31,4 +31,9 @@ module CommandParser
       original_position: position
     }
   end
+
+  def parse_find_book(input)
+    _, isbn = input.split('|')
+    isbn
+  end
 end

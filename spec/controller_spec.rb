@@ -89,5 +89,19 @@ RSpec.describe Controller do
         expect(@controller.execute(input)).to eq(expected_output)
       end
     end
+
+    context "with 'find_book' command" do
+      before do
+        @controller = described_class.new
+        @controller.execute('build_library|2|1|3')
+      end
+
+      it "returns the book's location when it is present" do
+        allow_any_instance_of(Library).to receive(:find_book).and_return({ shelf: 1, row: 1, column: 1 })
+        input = 'find_book|9780807281918'
+        expected_output = 'Found the book at 010101'
+        expect(@controller.execute(input)).to eq(expected_output)
+      end
+    end
   end
 end

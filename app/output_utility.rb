@@ -14,6 +14,10 @@ module OutputUtility
     "Slot #{position} is free"
   end
 
+  def find_book_output(bookshelf_pos, row_pos, column_pos)
+    "Found the book at #{position_string(bookshelf_pos, row_pos, column_pos)}"
+  end
+
   private
 
   def position_string(bookshelf_pos, row_pos, column_pos)
