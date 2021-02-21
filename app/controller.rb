@@ -46,6 +46,10 @@ class Controller
     book = Book.new(params[:title], params[:author], params[:isbn])
     result = @library.put_book(book)
 
-    put_book_output(result[:shelf], result[:row], result[:column])
+    if result
+      put_book_output(result[:shelf], result[:row], result[:column])
+    else
+      'All bookshelves are full'
+    end
   end
 end

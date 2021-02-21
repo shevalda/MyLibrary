@@ -40,6 +40,13 @@ RSpec.describe Controller do
         expected_output = 'Allocated address: 010101'
         expect(@controller.execute(input)).to eq(expected_output)
       end
+
+      it 'returns warning if all bookshelves are full' do
+        allow_any_instance_of(Library).to receive(:put_book).and_return(false)
+        input = 'put_book|9780747532743|Harry Potter 1|J. K. Rowling'
+        expected_output = 'All bookshelves are full'
+        expect(@controller.execute(input)).to eq(expected_output)
+      end
     end
   end
 end
