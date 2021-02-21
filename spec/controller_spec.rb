@@ -3,6 +3,7 @@ require './app/controller'
 RSpec.describe Controller do
   context '#execute' do
     let(:controller) { Controller.new }
+    let(:book) { double(title: 'Title', author: 'Author', isbn: '1234567890') }
 
     context 'no library is built yet' do
       it "returns the warning when not executing command 'build_library'" do
@@ -62,8 +63,6 @@ RSpec.describe Controller do
     end
 
     context "with 'take_book_from' command" do
-      let(:book) { double }
-
       before do
         @controller = described_class.new
         @controller.execute('build_library|2|1|3')
@@ -109,11 +108,32 @@ RSpec.describe Controller do
         expected_output = 'Book not found!'
         expect(@controller.execute(input)).to eq(expected_output)
       end
-      
+
       it 'returns warning when arguments count is not 2' do
         input = 'find_book'
         expected_output = 'Expected 2 arguments, given 1'
         expect(@controller.execute(input)).to eq(expected_output)
+      end
+    end
+
+    context "with 'list_books' command" do
+      before do
+        @controller = described_class.new
+        @controller.execute('build_library|2|1|1')
+      end
+
+      it 'returns all books available in the library' do
+        list_books = [
+          { shelf: 1, list_books: [{ row: 1, column: 1, book: book }] },
+          { shelf: 2, list_books: [{ row: 1, column: 1, book: book }] }
+        ]
+        allow_any_instance_of(Library).to receive(:list_books).and_return(list_books)
+
+        expected_output = <<~TEXT.chomp
+          010101: 1234567890 | Title | Author
+          020101: 1234567890 | Title | Author
+        TEXT
+        expect(@controller.execute('list_books')).to eq(expected_output)
       end
     end
   end

@@ -26,6 +26,8 @@ class Controller
         take_book_from(input)
       when 'find_book'
         find_book(input)
+      when 'list_books'
+        list_books
       end
     end
   rescue StandardError => e
@@ -81,5 +83,11 @@ class Controller
     else
       find_book_output(position[:shelf], position[:row], position[:column])
     end
+  end
+
+  def list_books
+    list_books = @library.list_books
+
+    list_books_output(list_books)
   end
 end

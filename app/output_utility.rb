@@ -18,6 +18,21 @@ module OutputUtility
     "Found the book at #{position_string(bookshelf_pos, row_pos, column_pos)}"
   end
 
+  def list_books_output(list_books)
+    output = []
+    list_books.each do |shelf_info|
+      shelf_info[:list_books].each do |book_info|
+        output << <<~TEXT.split.join(' ')
+          #{position_string(shelf_info[:shelf], book_info[:row], book_info[:column])}:
+          #{book_info[:book].isbn} |
+          #{book_info[:book].title} |
+          #{book_info[:book].author}
+        TEXT
+      end
+    end
+    output.join("\n")
+  end
+
   private
 
   def position_string(bookshelf_pos, row_pos, column_pos)
