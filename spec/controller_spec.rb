@@ -60,5 +60,21 @@ RSpec.describe Controller do
         expect(@controller.execute(input)).to eq(expected_output)
       end
     end
+
+    context "with 'take_book_from' command" do
+      let(:book) { double }
+
+      before do
+        @controller = described_class.new
+        @controller.execute('build_library|2|1|3')
+      end
+
+      it 'returns the free position from a previously filled postion' do
+        allow_any_instance_of(Library).to receive(:take_book_from).and_return(book)
+        input = 'take_book_from|020102'
+        expected_output = 'Slot 020102 is free'
+        expect(@controller.execute(input)).to eq(expected_output)
+      end
+    end
   end
 end

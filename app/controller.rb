@@ -22,6 +22,8 @@ class Controller
       case command
       when 'put_book'
         put_book(input)
+      when 'take_book_from'
+        take_book_from(input)
       end
     end
   rescue StandardError => e
@@ -51,5 +53,12 @@ class Controller
     else
       'All bookshelves are full'
     end
+  end
+
+  def take_book_from(input)
+    params = parse_take_book_from(input)
+    book = @library.take_book_from(params[:shelf], params[:row], params[:column])
+
+    take_book_from_output(params[:original_position])
   end
 end

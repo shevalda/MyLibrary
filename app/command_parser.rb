@@ -21,4 +21,14 @@ module CommandParser
     _, isbn, title, author = input.split('|')
     { isbn: isbn, title: title, author: author }
   end
+
+  def parse_take_book_from(input)
+    _, position = input.split('|')
+    {
+      shelf: Integer(position[0..1]),
+      row: Integer(position[2..3]),
+      column: Integer(position[4..5]),
+      original_position: position
+    }
+  end
 end

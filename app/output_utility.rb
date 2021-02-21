@@ -10,6 +10,10 @@ module OutputUtility
     "Allocated address: #{position_string(bookshelf_pos, row_pos, column_pos)}"
   end
 
+  def take_book_from_output(position)
+    "Slot #{position} is free"
+  end
+
   private
 
   def position_string(bookshelf_pos, row_pos, column_pos)
