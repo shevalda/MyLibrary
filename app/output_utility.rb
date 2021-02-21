@@ -1,4 +1,11 @@
 module OutputUtility
+  def build_library_output(bookshelf_count, row_size, column_size)
+    output = bookshelf_count.times.map.with_index(1) do |_, bookshelf_position|
+      "Shelf #{bookshelf_position} with #{row_size} rows and #{column_size} columns is added"
+    end
+    output.join("\n")
+  end
+
   def put_book_output(bookshelf_pos, row_pos, column_pos)
     "Allocated address: #{position_string(bookshelf_pos, row_pos, column_pos)}"
   end

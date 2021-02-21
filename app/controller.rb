@@ -34,10 +34,7 @@ class Controller
     params = parse_build_library_command(input)
     @library = Library.new(params[:bookshelf_count], params[:row_size], params[:column_size])
 
-    output = params[:bookshelf_count].times.map.with_index(1) do |_, bookshelf_position|
-      "Shelf #{bookshelf_position} with #{params[:row_size]} rows and #{params[:column_size]} columns is added"
-    end
-    output.join("\n")
+    build_library_output(params[:bookshelf_count], params[:row_size], params[:column_size])
   rescue StandardError => e
     e.message
   end
