@@ -102,6 +102,13 @@ RSpec.describe Controller do
         expected_output = 'Found the book at 010101'
         expect(@controller.execute(input)).to eq(expected_output)
       end
+
+      it "returns the book's location when it is present" do
+        allow_any_instance_of(Library).to receive(:find_book).and_return(nil)
+        input = 'find_book|9780807281918'
+        expected_output = 'Book not found!'
+        expect(@controller.execute(input)).to eq(expected_output)
+      end
     end
   end
 end

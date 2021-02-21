@@ -74,6 +74,10 @@ class Controller
     isbn = parse_find_book(input)
     position = @library.find_book(isbn)
 
-    find_book_output(position[:shelf], position[:row], position[:column])
+    if position.nil?
+      'Book not found!'
+    else
+      find_book_output(position[:shelf], position[:row], position[:column])
+    end
   end
 end
