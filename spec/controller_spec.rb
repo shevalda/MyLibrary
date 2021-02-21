@@ -82,6 +82,12 @@ RSpec.describe Controller do
         expected_output = 'Book cannot be taken'
         expect(@controller.execute(input)).to eq(expected_output)
       end
+
+      it 'returns warning if arguments count is not 2' do
+        input = 'take_book_from'
+        expected_output = 'Expected 2 arguments, given 1'
+        expect(@controller.execute(input)).to eq(expected_output)
+      end
     end
   end
 end

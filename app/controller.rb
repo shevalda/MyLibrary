@@ -56,6 +56,8 @@ class Controller
   end
 
   def take_book_from(input)
+    check_command_length(input, 2)
+
     params = parse_take_book_from(input)
     book = @library.take_book_from(params[:shelf], params[:row], params[:column])
 
