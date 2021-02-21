@@ -29,8 +29,9 @@ class Controller
   private
 
   def build_library(input)
-    params = parse_build_library_command(input)
+    check_command_length(input, 4)
 
+    params = parse_build_library_command(input)
     @library = Library.new(params[:bookshelf_count], params[:row_size], params[:column_size])
 
     output = params[:bookshelf_count].times.map.with_index(1) do |_, bookshelf_position|

@@ -27,6 +27,12 @@ RSpec.describe Controller do
         expected_output = 'Invalid number of bookhelves'
         expect(controller.execute(input)).to eq(expected_output)
       end
+
+      it 'returns warning when arguements count is not 4' do
+        input = 'build_library|2|1'
+        expected_output = 'Expected 4 arguments, given 3'
+        expect(controller.execute(input)).to eq(expected_output)
+      end
     end
 
     context "with 'put_book' command" do
