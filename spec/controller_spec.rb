@@ -75,6 +75,13 @@ RSpec.describe Controller do
         expected_output = 'Slot 020102 is free'
         expect(@controller.execute(input)).to eq(expected_output)
       end
+
+      it 'returns warning if position is invalid' do
+        allow_any_instance_of(Library).to receive(:take_book_from).and_return(false)
+        input = 'take_book_from|020102'
+        expected_output = 'Book cannot be taken'
+        expect(@controller.execute(input)).to eq(expected_output)
+      end
     end
   end
 end

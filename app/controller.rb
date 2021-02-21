@@ -59,6 +59,10 @@ class Controller
     params = parse_take_book_from(input)
     book = @library.take_book_from(params[:shelf], params[:row], params[:column])
 
-    take_book_from_output(params[:original_position])
+    if book
+      take_book_from_output(params[:original_position])
+    else
+      'Book cannot be taken'
+    end
   end
 end
