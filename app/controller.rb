@@ -88,6 +88,10 @@ class Controller
   def list_books
     list_books = @library.list_books
 
-    list_books_output(list_books)
+    if list_books.empty?
+      'Library is empty'
+    else
+      list_books_output(list_books)
+    end
   end
 end

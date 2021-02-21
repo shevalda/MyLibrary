@@ -135,6 +135,12 @@ RSpec.describe Controller do
         TEXT
         expect(@controller.execute('list_books')).to eq(expected_output)
       end
+
+      it 'returns warning when the library is empty' do
+        allow_any_instance_of(Library).to receive(:list_books).and_return([])
+        expected_output = 'Library is empty'
+        expect(@controller.execute('list_books')).to eq(expected_output)
+      end
     end
   end
 end
