@@ -57,6 +57,11 @@ RSpec.describe Controller do
         input = 'exit'
         expect(described_class.execute(input)).not_to eq('Command not recognised')
       end
+
+      it "returns false with 'exit' command" do
+        input = 'exit'
+        expect(described_class.execute(input)).to be(false)
+      end
     end
   end
 end

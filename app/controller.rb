@@ -14,15 +14,16 @@ class Controller
     'find_book' => FindBookCommand.new,
     'list_books' => ListBooksCommand.new,
     'search_books_by_title' => SearchBooksByTitleCommand.new,
-    'search_books_by_author' => SearchBooksByAuthorCommand.new,
-    'exit' => false
+    'search_books_by_author' => SearchBooksByAuthorCommand.new
   }
 
   def self.execute(input)
     command_type = input.split('|').first
     command = @@commands[command_type]
 
-    if command.nil?
+    if command_type == 'exit'
+      false
+    elsif command.nil?
       'Command not recognised'
     else
       command.execute(input)
