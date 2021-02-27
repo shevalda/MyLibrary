@@ -22,6 +22,11 @@ RSpec.describe Controller do
         input = 'build_library|1|1|1'
         expect(described_class.execute(input)).not_to eq('Command not recognised')
       end
+
+      it "recognises 'put_book' command" do
+        input = 'put_book|9780747532743|Harry Potter 1|J. K. Rowling'
+        expect(described_class.execute(input)).not_to eq('Command not recognised')
+      end
     end
   end
 end
