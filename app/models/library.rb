@@ -11,7 +11,7 @@ class Library
 
   private_class_method :new
   def initialize
-    @bookhelves = nil
+    @bookshelves = nil
   end
 
   def build(bookshelves_count, row, column)
@@ -21,6 +21,8 @@ class Library
   end
 
   def put_book(book)
+    library_already_built?
+
     @bookshelves.each.with_index(1) do |bookshelf, shelf_position|
       row_column_position = bookshelf.put_book(book)
       return { shelf: shelf_position }.merge(row_column_position) if row_column_position
@@ -76,6 +78,10 @@ class Library
   end
 
   private
+
+  def library_already_built?
+    raise 'Library not build yet' if @bookshelves.nil?
+  end
 
   def bookshelves_count
     @bookshelves.count

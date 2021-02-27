@@ -2,11 +2,15 @@ require './app/models/library'
 
 RSpec.describe Library do
   let(:book) { double }
-  # let(:library) { described_class.instance.build(2, 1, 3) }
 
-  before do
-    @library = described_class.instance
-    @library.build(2, 1, 3)
+  before(:all) { @library = described_class.instance }
+
+  context 'when library is not built yet' do
+    let(:error_message) { 'Library not build yet' }
+
+    it 'raises an error when calling put_book' do
+      expect { @library.put_book(book) }.to raise_error(error_message)
+    end
   end
 
   context '#build' do
@@ -29,6 +33,8 @@ RSpec.describe Library do
     end
 
     context 'with input 2 bookshelves of 1 row and 3 columns' do
+      before { @library.build(2, 1, 3) }
+
       it 'returns Library with 2 bookshelves of 1 row and 3 columns' do
         expect(@library.bookshelves.length).to eq(2)
         expect(@library.bookshelves[0].rows_size).to eq(1)
@@ -38,6 +44,8 @@ RSpec.describe Library do
   end
 
   context '#put_book' do
+    before { @library.build(2, 1, 3) }
+
     context 'with empty bookshelves' do
       it 'returns book location on the first avaiable space on first shelf' do
         result = @library.put_book(book)
@@ -76,6 +84,8 @@ RSpec.describe Library do
   end
 
   context '#take_book_from' do
+    before { @library.build(2, 1, 3) }
+
     it 'returns Book when the selected positon has a book' do
       allow_any_instance_of(Bookshelf).to receive(:take_book_from).and_return(book)
       result = @library.take_book_from(1, 1, 1)
@@ -102,6 +112,8 @@ RSpec.describe Library do
   end
 
   context '#find_book' do
+    before { @library.build(2, 1, 3) }
+
     it 'returns shelf, row, and, column position if the book is found' do
       allow_any_instance_of(Bookshelf).to receive(:find_book).and_return({ row: 1, column: 1 })
       result = @library.find_book('1234567890')
@@ -116,16 +128,15 @@ RSpec.describe Library do
   end
 
   context '#list_books' do
+    before { @library.build(2, 1, 1) }
+
     it 'returns [] when all bookshelves are empty' do
       expect(@library.list_books).to eq([])
     end
 
     context 'when there are books on the bookshelves' do
       before do
-        @library.build(2, 1, 1)
-        allow_any_instance_of(Bookshelf).to(
-          receive(:list_books).and_return([{ row: 1, column: 1, book: book }])
-        )
+        allow_any_instance_of(Bookshelf).to(receive(:list_books).and_return([{ row: 1, column: 1, book: book }]))
       end
 
       it 'returns list of books and their shelf, row, and column position' do
@@ -139,6 +150,8 @@ RSpec.describe Library do
   end
 
   context '#search_books_by_title' do
+    before { @library.build(2, 1, 1) }
+
     it 'returns [] if no book is found with the title keyword' do
       result = @library.search_books_by_title('title')
       expect(result).to eq([])
@@ -163,6 +176,8 @@ RSpec.describe Library do
   end
 
   context '#search_books_by_author' do
+    before { @library.build(2, 1, 1) }
+
     it 'returns [] if no book is found with the author keyword' do
       result = @library.search_books_by_author('author')
       expect(result).to eq([])
