@@ -11,6 +11,10 @@ RSpec.describe Library do
     it 'raises an error when calling put_book' do
       expect { @library.put_book(book) }.to raise_error(error_message)
     end
+
+    it 'raises an error when calling take_book_from' do
+      expect { @library.take_book_from(1, 1, 1) }.to raise_error(error_message)
+    end
   end
 
   context '#build' do
