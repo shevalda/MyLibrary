@@ -1,97 +1,33 @@
-require './app/command_parser'
-require './app/output_utility'
-require './app/models/library'
-require './app/models/book'
+require './app/commands/build_library_command'
+require './app/commands/put_book_command'
+require './app/commands/take_book_from_command'
+require './app/commands/find_book_command'
+require './app/commands/list_books_command'
+require './app/commands/search_books_by_title_command'
+require './app/commands/search_books_by_author_command'
 
 class Controller
-  include CommandParser
-  include OutputUtility
+  @@commands = {
+    'build_library' => BuildLibraryCommand.new,
+    'put_book' => PutBookCommand.new,
+    'take_book_from' => TakeBookFromCommand.new,
+    'find_book' => FindBookCommand.new,
+    'list_books' => ListBooksCommand.new,
+    'search_books_by_title' => SearchBooksByTitleCommand.new,
+    'search_books_by_author' => SearchBooksByAuthorCommand.new,
+    'exit' => false
+  }
 
-  def initialize
-    @library = nil
-  end
+  def self.execute(input)
+    command_type = input.split('|').first
+    command = @@commands[command_type]
 
-  def execute(input)
-    command = parse_command(input)
-
-    if command == 'build_library'
-      build_library(input)
-    elsif @library.nil?
-      return 'Library is not built yet' if @library.nil?
+    if command.nil?
+      'Command not recognised'
     else
-      case command
-      when 'put_book'
-        put_book(input)
-      when 'take_book_from'
-        take_book_from(input)
-      when 'find_book'
-        find_book(input)
-      when 'list_books'
-        list_books
-      end
+      command.execute(input)
     end
   rescue StandardError => e
     e.message
-  end
-
-  private
-
-  def build_library(input)
-    check_command_length(input, 4)
-
-    params = parse_build_library_command(input)
-    @library = Library.new(params[:bookshelf_count], params[:row_size], params[:column_size])
-
-    build_library_output(params[:bookshelf_count], params[:row_size], params[:column_size])
-  end
-
-  def put_book(input)
-    check_command_length(input, 4)
-
-    params = parse_put_book_command(input)
-    book = Book.new(params[:title], params[:author], params[:isbn])
-    result = @library.put_book(book)
-
-    if result
-      put_book_output(result[:shelf], result[:row], result[:column])
-    else
-      'All bookshelves are full'
-    end
-  end
-
-  def take_book_from(input)
-    check_command_length(input, 2)
-
-    params = parse_take_book_from(input)
-    book = @library.take_book_from(params[:shelf], params[:row], params[:column])
-
-    if book
-      take_book_from_output(params[:original_position])
-    else
-      'Book cannot be taken'
-    end
-  end
-
-  def find_book(input)
-    check_command_length(input, 2)
-
-    isbn = parse_find_book(input)
-    position = @library.find_book(isbn)
-
-    if position.nil?
-      'Book not found!'
-    else
-      find_book_output(position[:shelf], position[:row], position[:column])
-    end
-  end
-
-  def list_books
-    list_books = @library.list_books
-
-    if list_books.empty?
-      'Library is empty'
-    else
-      list_books_output(list_books)
-    end
   end
 end
