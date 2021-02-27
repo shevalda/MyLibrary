@@ -14,7 +14,7 @@ RSpec.describe FindBookCommand do
     expect(@command.execute(input)).to eq(expected_output)
   end
 
-  it "returns the book's location when it is present" do
+  it 'returns warning if the book is not found' do
     allow_any_instance_of(Library).to receive(:find_book).and_return(nil)
     input = 'find_book|9780807281918'
     expected_output = 'Book not found!'
