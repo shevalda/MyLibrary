@@ -62,6 +62,8 @@ class Library
   end
 
   def search_books_by_title(title)
+    library_already_built?
+
     list = []
     @bookshelves.each.with_index(1) do |bookshelf, shelf_position|
       shelf_list_books = bookshelf.search_books_by_title(title)

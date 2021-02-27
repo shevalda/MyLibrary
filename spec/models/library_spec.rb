@@ -23,6 +23,10 @@ RSpec.describe Library do
     it 'raises an error when calling list_books' do
       expect { @library.list_books }.to raise_error(error_message)
     end
+
+    it 'raises an error when calling search_books_by_title' do
+      expect { @library.search_books_by_title('title') }.to raise_error(error_message)
+    end
   end
 
   context '#build' do
