@@ -39,6 +39,8 @@ class Library
   end
 
   def find_book(isbn)
+    library_already_built?
+
     @bookshelves.each.with_index(1) do |bookshelf, shelf_position|
       row_column_position = bookshelf.find_book(isbn)
       return { shelf: shelf_position }.merge(row_column_position) if row_column_position
