@@ -16,5 +16,12 @@ RSpec.describe Controller do
         expect(described_class.execute(input)).to eq('Command not recognised')
       end
     end
+
+    context 'with valid command type' do
+      it "recognises 'build_library' command" do
+        input = 'build_library|1|1|1'
+        expect(described_class.execute(input)).not_to eq('Command not recognised')
+      end
+    end
   end
 end
