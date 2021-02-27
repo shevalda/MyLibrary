@@ -52,6 +52,11 @@ RSpec.describe Controller do
         input = 'search_books_by_author|author'
         expect(described_class.execute(input)).not_to eq('Command not recognised')
       end
+
+      it "recognises 'exit' command" do
+        input = 'exit'
+        expect(described_class.execute(input)).not_to eq('Command not recognised')
+      end
     end
   end
 end
