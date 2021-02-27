@@ -49,6 +49,8 @@ class Library
   end
 
   def list_books
+    library_already_built?
+
     list = []
     @bookshelves.each.with_index(1) do |bookshelf, shelf_position|
       shelf_list_books = bookshelf.list_books
