@@ -32,6 +32,11 @@ RSpec.describe Controller do
         input = 'take_book_from|020102'
         expect(described_class.execute(input)).not_to eq('Command not recognised')
       end
+
+      it "recognises 'find_book' command" do
+        input = 'find_book|020102'
+        expect(described_class.execute(input)).not_to eq('Command not recognised')
+      end
     end
   end
 end
