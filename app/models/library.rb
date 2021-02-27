@@ -3,7 +3,18 @@ require './app/models/bookshelf'
 class Library
   attr_reader :bookshelves
 
-  def initialize(bookshelves_count, row, column)
+  @@instance = Library.new
+
+  def self.instance
+    @@instance
+  end
+
+  private_class_method :new
+  def initialize
+    @bookhelves = nil
+  end
+
+  def build(bookshelves_count, row, column)
     raise 'Invalid number of bookhelves' unless bookshelves_count.positive?
 
     @bookshelves = Array.new(bookshelves_count) { Bookshelf.new(row, column) }
