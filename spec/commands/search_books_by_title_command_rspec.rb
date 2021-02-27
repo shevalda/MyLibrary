@@ -1,7 +1,7 @@
-require './app/commands/find_book_command'
+require './app/commands/search_books_by_title_command'
 require './app/models/library'
 
-RSpec.describe FindBookCommand do
+RSpec.describe SearchBooksByTitleCommand do
   let(:book) { double(title: 'Title', author: 'Author', isbn: '1234567890') }
 
   before do
@@ -19,6 +19,21 @@ RSpec.describe FindBookCommand do
     allow_any_instance_of(Library).to receive(:search_books_by_title).and_return([])
     input = 'search_books_by_title|judul'
     expected_output = 'Book not found!'
+    expect(@command.execute(input)).to eq(expected_output)
+  end
+
+  it 'returns all books that match the keyword' do
+    book_list = [
+      { shelf: 1, list_books: [{ row: 1, column: 1, book: book }] },
+      { shelf: 2, list_books: [{ row: 1, column: 1, book: book }] }
+    ]
+    allow_any_instance_of(Library).to receive(:search_books_by_title).and_return(book_list)
+
+    expected_output = <<~TEXT.chomp
+      010101: 1234567890 | Title | Author
+      020101: 1234567890 | Title | Author
+    TEXT
+    input = 'search_books_by_title|title'
     expect(@command.execute(input)).to eq(expected_output)
   end
 end
