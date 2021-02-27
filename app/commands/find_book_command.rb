@@ -19,7 +19,7 @@ class FindBookCommand < LibraryCommand
 
   def output_command(arguments)
     if arguments.nil?
-      'Book not found!'
+      BOOK_NOT_FOUND
     else
       "Found the book at #{position_string(arguments[:shelf], arguments[:row], arguments[:column])}"
     end

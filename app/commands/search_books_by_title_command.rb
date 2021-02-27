@@ -7,7 +7,7 @@ class SearchBooksByTitleCommand < LibraryCommand
     keyword = parse_command(arguments)
     book_list = @library.search_books_by_title(keyword)
 
-    output_command(book_list)
+    book_list_output(book_list)
   end
 
   private
@@ -15,11 +15,5 @@ class SearchBooksByTitleCommand < LibraryCommand
   def parse_command(arguments)
     _, keyword = arguments.split('|')
     keyword
-  end
-
-  def output_command(book_list)
-    return 'Book not found!' if book_list.empty?
-
-    book_list_output(book_list)
   end
 end
