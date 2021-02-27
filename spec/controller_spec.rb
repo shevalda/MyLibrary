@@ -9,5 +9,12 @@ RSpec.describe Controller do
         expect(described_class.execute(input)).to eq(expected_output)
       end
     end
+
+    context 'with invalid command type' do
+      it "returns 'Command not recognised'" do
+        input = 'random_command'
+        expect(described_class.execute(input)).to eq('Command not recognised')
+      end
+    end
   end
 end
