@@ -26,8 +26,8 @@ class Bookshelf
   end
 
   def take_book_from(row, column)
-    return false if row > rows_size || row <= 0
-    return false if column > columns_size || column <= 0
+    raise 'Invalid code!' unless row <= rows_size && row.positive?
+    raise 'Invalid code!' unless column <= columns_size && column.positive?
 
     book = @rows[row - 1][column - 1]
     unless book.nil?

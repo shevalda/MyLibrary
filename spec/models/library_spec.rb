@@ -120,14 +120,6 @@ RSpec.describe Library do
       it 'raises an error if shelf position is larger than the number of shelves' do
         expect { @library.take_book_from(3, 1, 1) }.to raise_error('Invalid code!')
       end
-
-      it 'returns false if row position is invalid' do
-        expect(@library.take_book_from(1, 5, 1)).to be(false)
-      end
-
-      it 'returns false if column position is invalid' do
-        expect(@library.take_book_from(1, 1, 5)).to be(false)
-      end
     end
   end
 
