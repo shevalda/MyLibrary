@@ -15,9 +15,9 @@ class BuildLibraryCommand < LibraryCommand
   def parse_command(arguments)
     _, bookshelf_count, row_size, column_size = arguments.split('|')
     {
-      bookshelf_count: Integer(bookshelf_count),
-      row_size: Integer(row_size),
-      column_size: Integer(column_size)
+      bookshelf_count: bookshelf_count.to_i,
+      row_size: row_size.to_i,
+      column_size: column_size.to_i
     }
   end
 
