@@ -92,7 +92,7 @@ class Bookshelf
 
   def put_book_in_sparse_position(book)
     position = pop_sparse_position
-    @rows[position[:row]][position[:column]] = book
+    @rows[position[:row] - 1][position[:column] - 1] = book
     position
   end
 
