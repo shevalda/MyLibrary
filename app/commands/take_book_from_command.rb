@@ -15,9 +15,9 @@ class TakeBookFromCommand < LibraryCommand
   def parse_command(arguments)
     _, position = arguments.split('|')
     {
-      shelf: Integer(position[0..1]),
-      row: Integer(position[2..3]),
-      column: Integer(position[4..5])
+      shelf: position[0..1].to_i,
+      row: position[2..3].to_i,
+      column: position[4..5].to_i
     }
   end
 
