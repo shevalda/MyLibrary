@@ -33,7 +33,7 @@ class Library
   def take_book_from(shelf, row, column)
     library_already_built?
 
-    raise ArgumentError unless shelf.positive? && shelf <= bookshelves_count
+    raise 'Invalid code!' unless shelf.positive? && shelf <= bookshelves_count
 
     @bookshelves[shelf - 1].take_book_from(row, column)
   end
