@@ -6,30 +6,32 @@ RSpec.describe Library do
   before(:all) { @library = described_class.instance }
 
   context 'when library is not built yet' do
+    let(:instance) { Library.send(:new) }
+
     let(:error_message) { 'Library not build yet' }
 
     it 'raises an error when calling put_book' do
-      expect { @library.put_book(book) }.to raise_error(error_message)
+      expect { instance.put_book(book) }.to raise_error(error_message)
     end
 
     it 'raises an error when calling take_book_from' do
-      expect { @library.take_book_from(1, 1, 1) }.to raise_error(error_message)
+      expect { instance.take_book_from(1, 1, 1) }.to raise_error(error_message)
     end
 
     it 'raises an error when calling find_book' do
-      expect { @library.find_book(book) }.to raise_error(error_message)
+      expect { instance.find_book(book) }.to raise_error(error_message)
     end
 
     it 'raises an error when calling list_books' do
-      expect { @library.list_books }.to raise_error(error_message)
+      expect { instance.list_books }.to raise_error(error_message)
     end
 
     it 'raises an error when calling search_books_by_title' do
-      expect { @library.search_books_by_title('title') }.to raise_error(error_message)
+      expect { instance.search_books_by_title('title') }.to raise_error(error_message)
     end
 
     it 'raises an error when calling search_books_by_author' do
-      expect { @library.search_books_by_author('author') }.to raise_error(error_message)
+      expect { instance.search_books_by_author('author') }.to raise_error(error_message)
     end
   end
 
